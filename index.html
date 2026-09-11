@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Design Lab | Presentación Comercial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #171715;
+            --bone: #E5E3DD;
+            --wine: #521B17;
+            --grey: #65645F;
+            --line: #B8B6B0;
+            --white: #FFFFFF;
+            
+            --font-title: 'Oswald', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --margin: 64px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            max-width: 1600px;
+            aspect-ratio: 16 / 9;
+            background-color: var(--bone);
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .presentation-container::-webkit-scrollbar { display: none; }
+        .presentation-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            padding: var(--margin);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bg-dark { background-color: var(--black); color: var(--bone); }
+        .bg-light { background-color: var(--bone); color: var(--black); }
+        .bg-wine { background-color: var(--wine); color: var(--bone); }
+
+        .editorial-header {
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 16px;
+            margin-bottom: 40px;
+        }
+        .bg-dark .editorial-header { border-bottom: 1px solid var(--grey); }
+
+        h1, h2, h3 { font-family: var(--font-title); text-transform: uppercase; font-weight: 500; }
+        p { font-weight: 300; line-height: 1.6; }
+
+        .slide-cover {
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        .logo-center {
+            z-index: 2;
+            font-family: var(--font-title);
+            font-size: 6rem;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+        .cover-footer {
+            position: absolute;
+            bottom: var(--margin);
+            width: calc(100% - (var(--margin) * 2));
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--grey);
+            padding-top: 16px;
+        }
+
+        .quote-slide {
+            justify-content: center;
+        }
+        .massive-quote {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            max-width: 80%;
+            margin-bottom: 2rem;
+        }
+        
+        .grid-editorial {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .grid-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: 0.5s ease;
+        }
+        .grid-img:hover { filter: grayscale(0%); }
+        
+        .img-large { grid-row: span 2; }
+        .text-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-top: 1px solid var(--line);
+            padding-top: 20px;
+        }
+
+        .process-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            flex-grow: 1;
+            align-items: center;
+        }
+        .process-step {
+            border-top: 1px solid var(--black);
+            padding-top: 20px;
+        }
+        .step-num { font-family: var(--font-title); font-size: 3rem; margin-bottom: 10px; }
+        .step-title { font-size: 1.5rem; margin-bottom: 10px; }
+
+        .nav-hint {
+            position: absolute;
+            right: var(--margin);
+            bottom: var(--margin);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container" id="presentation">
+
+        <!-- SLIDE 01: PORTADA -->
+        <div class="slide slide-cover bg-dark">
+            <video class="video-bg" autoplay loop muted playsinline>
+                <!-- Se agregó %20 para sustituir los espacios en el nombre de tu carpeta -->
+                <source src="assets/2026%20pitc%20grad/TDL_Portada_3s.mp4" type="video/mp4">
+            </video>
+            <div class="logo-center">THE DESIGN LAB</div>
+            <div class="cover-footer">
+                <span>Concepto & Narrativa</span>
+                <span>Espacios & Escenarios</span>
+                <span>Momentos</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 02: BRIEF 000 -->
+        <div class="slide bg-light quote-slide">
+            <div class="editorial-header">
+                <span>000 / Brief</span>
+                <span>El Inicio</span>
+            </div>
+            <h2 class="massive-quote">"Transformamos espacios en experiencias que permanecen más allá de una noche."</h2>
+            <div class="text-box" style="border: none; max-width: 400px; font-weight: 500;">
+                <p>El proceso comienza entendiendo al cliente, la audiencia y la experiencia exacta que se requiere provocar.</p>
+            </div>
+            <div class="nav-hint">Scroll ↓</div>
+        </div>
+
+        <!-- SLIDE 03: REFERENCIAS -->
+        <div class="slide bg-light">
+            <div class="editorial-header">
+                <span>001 / Archivo</span>
+                <span>Referencias & Inspiración</span>
+            </div>
+            <div class="grid-editorial">
+                <div class="text-box">
+                    <h3 style="font-size: 2rem; margin-bottom: 10px;">Composición</h3>
+                    <p>Forma, iluminación, sensación, detalle y contexto. Archivo creativo en construcción constante.</p>
+                </div>
+                <!-- Imágenes extraídas de tu carpeta -->
+                <img src="assets/2026%20pitc%20grad/43.jpg" class="grid-img img-large" alt="Reference 1">
+                <img src="assets/2026%20pitc%20grad/44.jpg" class="grid-img" alt="Reference 2">
+                <div style="grid-column: 3; grid-row: 2;">
+                    <img src="assets/2026%20pitc%20grad/46.jpg" class="grid-img" alt="Reference 3">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 06: EL PROCESO -->
+        <div class="slide bg-light">
+            <div class="editorial-header">
+                <span>002 / The Journey</span>
+                <span>Metodología de Trabajo</span>
+            </div>
+            <div style="margin-bottom: 40px; max-width: 50%;">
+                <p>Nuestra ruta de trabajo está diseñada para garantizar precisión entre la visualización y la ejecución final.</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-step">
+                    <div class="step-num">01.</div>
+                    <h3 class="step-title">Definir</h3>
+                    <p>Recepción del brief, desarrollo del concepto rector y primera propuesta visual y espacial.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">02.</div>
+                    <h3 class="step-title">Validar</h3>
+                    <p>Tasting de elementos, pre-visualización técnica y aprobación de materiales y recursos.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">03.</div>
+                    <h3 class="step-title">Producir</h3>
+                    <p>Coordinación de producción, montaje logístico y ejecución en vivo del evento.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 07: PARTNERSHIPS -->
+        <div class="slide bg-dark quote-slide">
+            <div class="editorial-header">
+                <span>003 / Partnerships</span>
+                <span>Ecosistema Corporativo</span>
+            </div>
+            <div class="grid-editorial" style="grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <div>
+                    <h2 style="font-size: 3.5rem; margin-bottom: 20px;">Capacidad Visual y Operativa</h2>
+                    <p style="font-size: 1.2rem; color: var(--line);">A través del ecosistema de Incantú, Trufó y Bellafiore, TDL se posiciona como el centro creativo que dirige el concepto y lo lleva a la realidad con estándares impecables.</p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 20px; border-left: 1px solid var(--grey); padding-left: 40px;">
+                    <h3 style="font-size: 2rem;">Incantú</h3>
+                    <h3 style="font-size: 2rem;">Trufó</h3>
+                    <h3 style="font-size: 2rem;">Bellafiore</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('presentation');
+        document.addEventListener('keydown', (e) => {
+            const slideHeight = window.innerHeight;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                container.scrollBy({ top: slideHeight, behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                container.scrollBy({ top: -slideHeight, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
